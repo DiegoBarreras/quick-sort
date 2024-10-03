@@ -1,4 +1,6 @@
 let vecp1 = [];
+let comps = 0;
+let inter = 0;
 
 function gen(vecp1) {
     for (let i = 0; i < 25000; i++) {
@@ -17,8 +19,11 @@ function quickSort(vecp1) {
 
     for (let i = 1; i < vecp1.length; i++) {
         if (vecp1[i] < pivote) {
+            comps++;
+            inter++;
             izq.push(vecp1[i]);
         } else {
+            comps++;
             der.push(vecp1[i]);
         }
     }
@@ -27,6 +32,8 @@ function quickSort(vecp1) {
 }
 
 boton_generar.addEventListener("click", function() {
+    comps = 0;
+    inter = 0;
     vecp1 = [];
     gen(vecp1);
     llenarTabla(vecp1);
@@ -35,6 +42,7 @@ boton_generar.addEventListener("click", function() {
 boton_sort.addEventListener("click", function() {
     vecp1 = quickSort(vecp1);
     llenarTabla(vecp1); 
+    alerta(comps, inter);
 });
 
 function llenarTabla(vecp1) {
@@ -50,4 +58,9 @@ function llenarTabla(vecp1) {
 
         tbody.appendChild(tr);
     }
+}
+
+function alerta(comps, inter) {
+    alert("El número de comparaciones es de: " + comps);
+    alert("El número de intercambios es de: " + inter);
 }
